@@ -27,29 +27,28 @@ public class RestBookingPositiveTest {
             "}";
 
     @Test
-    public void authTest() {
-        RestRequest.auth(authBody);
+    public void auth() {
+        BookingApiPositiveSteps.auth(authBody);
     }
 
     @Test
-    public void createBooking() {
-        Integer bookingId = RestRequest.createBooking(createBookingBody);
-        RestRequest.getBooking(bookingId);
+    public void createAndGetBooking() {
+        Integer bookingId = BookingApiPositiveSteps.createBooking(createBookingBody);
+        BookingApiPositiveSteps.getBooking(bookingId);
     }
 
     @Test
-    public void updateBooking (){
-        Integer bookingId = RestRequest.createBooking(createBookingBody);
-        String token = RestRequest.auth(authBody);
-        RestRequest.updateBooking(updateBookingBody,bookingId, token);
-        RestRequest.getBooking(bookingId);
+    public void createAndUpdateAndGetBooking() {
+        Integer bookingId = BookingApiPositiveSteps.createBooking(createBookingBody);
+        String token = BookingApiPositiveSteps.auth(authBody);
+        BookingApiPositiveSteps.updateBooking(updateBookingBody, bookingId, token);
+        BookingApiPositiveSteps.getBooking(bookingId);
     }
 
     @Test
-    public void deleteBooking() {
-        Integer bookingId = RestRequest.createBooking(createBookingBody);
-        String token = RestRequest.auth(authBody);
-        RestRequest.deleteBooking(bookingId,token);
-        RestRequest.getBooking(bookingId);
+    public void createAndDeleteAndGetBooking() {
+        Integer bookingId = BookingApiPositiveSteps.createBooking(createBookingBody);
+        String token = BookingApiPositiveSteps.auth(authBody);
+        BookingApiPositiveSteps.deleteBooking(bookingId, token);
     }
 }

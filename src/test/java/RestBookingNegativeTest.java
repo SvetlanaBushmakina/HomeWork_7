@@ -21,23 +21,22 @@ public class RestBookingNegativeTest {
             "}";
 
     @Test
-    public void authTest() {
-        RestRequest.auth(authBody);
+    public void auth() {
+        BookingApiNegativeSteps.auth(authBody);
     }
 
     @Test
     public void createBooking() {
-        RestRequest.createBookingNegative(createBookingBody);
+        BookingApiNegativeSteps.createBooking(createBookingBody);
     }
-
     @Test
-    public void getBooking (){
-        RestRequest.getBooking(12);
+    public void getBooking(){
+        BookingApiNegativeSteps.getBooking(1);
     }
 
     @Test
     public void deleteBooking() {
-        String token = RestRequest.auth(authBodyCorrect);
-        RestRequest.deleteBooking(12,token);
+        String token = BookingApiPositiveSteps.auth(authBodyCorrect);
+        BookingApiNegativeSteps.deleteBooking(1, token);
     }
 }

@@ -1,10 +1,11 @@
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 
 public class RestRequest {
     private static final String baseUri = "https://restful-booker.herokuapp.com";
 
-    public static String auth(String body) {
+    public static Response auth(String body) {
 
         return RestAssured.given()
                 .baseUri(baseUri)
@@ -17,14 +18,11 @@ public class RestRequest {
                 .then()
                 .log()
                 .body()
-                .statusCode(200)
                 .extract()
-                .response()
-                .jsonPath()
-                .get("token");
+                .response();
     }
 
-    public static Integer createBooking(String body) {
+    public static Response createBooking(String body) {
 
         return RestAssured.given()
                 .baseUri(baseUri)
@@ -38,14 +36,12 @@ public class RestRequest {
                 .log()
                 .body()
                 .extract()
-                .response()
-                .jsonPath()
-                .get("bookingid");
+                .response();
     }
 
-    public static void createBookingNegative (String body) {
+    public static Response createBookingNegative (String body) {
 
-         RestAssured.given()
+         return RestAssured.given()
                 .baseUri(baseUri)
                 .basePath("/booking")
                 .body(body)
@@ -60,9 +56,9 @@ public class RestRequest {
                 .response();
     }
 
-    public static void getBooking(Integer bookingId) {
+    public static Response getBooking(Integer bookingId) {
 
-        RestAssured.given()
+        return RestAssured.given()
                 .baseUri(baseUri)
                 .basePath("/booking/" + bookingId)
                 .contentType(ContentType.JSON)
@@ -74,8 +70,8 @@ public class RestRequest {
                 .response();
     }
 
-    public static void updateBooking(String body, Integer bookingId, String token) {
-        RestAssured.given()
+    public static Response updateBooking(String body, Integer bookingId, String token) {
+        return RestAssured.given()
                 .baseUri(baseUri)
                 .basePath("/booking/" + bookingId)
                 .body(body)
@@ -91,9 +87,9 @@ public class RestRequest {
                 .response();
     }
 
-    public static void deleteBooking(Integer bookingId, String token) {
+    public static Response deleteBooking(Integer bookingId, String token) {
 
-        RestAssured.given()
+        return RestAssured.given()
                 .baseUri(baseUri)
                 .basePath("/booking/" + bookingId)
                 .contentType(ContentType.JSON)
